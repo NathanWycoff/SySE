@@ -1,0 +1,3 @@
+SySE is a syntactic sentence extracter based on pystatparser, which in turn is based on nltk. nltk is not available on Windows systems, therefore, this program is not expected to work on them.
+It can be found on github here: https://github.com/NathanWycoff/SySE
+You can reach its author, Nathan Wycoff, at nathanbrwycoff@gmail.com

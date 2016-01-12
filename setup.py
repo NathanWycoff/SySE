@@ -7,6 +7,7 @@ setup(name='syse',
     author='Nathan Wycoff',
     author_email='nathanbrwycoff@gmail.com',
     packages=['syse'],
+    license = 'MIT',
     install_requires = [
         'pandas',
         're',
