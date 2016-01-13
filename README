@@ -1,3 +1,22 @@
 SySE is a syntactic sentence extracter based on pystatparser, which in turn is based on nltk. nltk is not available on Windows systems, therefore, this program is not expected to work on them.
 It can be found on github here: https://github.com/NathanWycoff/SySE
 You can reach its author, Nathan Wycoff, at nathanbrwycoff@gmail.com
+***Installation:
+You must first download pystatparser:
+pip install --upgrade https://github.com/emilmont/pyStatParser/tarball/master
+
+Then you can install SySE:
+pip install --upgrade https://github.com/NathanWycoff/SySE/tarball/master
+
+Useage:
+from syse import SySE
+sy = SySE()
+
+#Train on a dataset
+sy.train(trainingSentences, importanceLabels)
+
+#Evaluate a single sentence without context
+sy.classify("This is an important sentence")
+
+#Summarize an article (str or unicode) stored in myArticle
+sy.summarize(myArticle)

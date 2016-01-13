@@ -4,6 +4,7 @@ import re
 import numpy as np
 import unicodedata
 import math
+import os
 
 #Syntactic Sentence Extraction (SySE)
 
@@ -99,10 +100,11 @@ class SySE:
                 print 'Lables should be either 0 or 1.'
                 print 'exiting...'
                 return
-        
+                
+        #REMOVE THIS BEFORE PUBLISHING
         #Split training sentences into Important (I) and Regular (R) (Unimportant)
-        self.importantRootProbabilities = filter(lambda x: labels[trainingSentences.index(x)]==1, trainingSentences)
-        self.regularRootProbabilities = filter(lambda x: not labels[trainingSentences.index(x)]==1, trainingSentences)
+        #self.importantRootProbabilities = filter(lambda x: labels[trainingSentences.index(x)]==1, trainingSentences)
+        #self.regularRootProbabilities = filter(lambda x: not labels[trainingSentences.index(x)]==1, trainingSentences)
                             
         ###Train Class Priors
         self.classPriors.append(float(labels.count(0))/float(len(labels)))
@@ -592,3 +594,55 @@ class SySE:
         sentences = sentences[:-1]
         sentences = [s.strip() for s in sentences]
         return sentences
+    
+    #Write the parameters we have to file. This will create three files.
+    def storeParameters(self, target):
+        try: str(target)
+        except:
+            print "store parameters needs to be passed a string"
+            return
+        f = open(target,'w')
+        f.write(reduce(lambda x,y: str(x) + ',' + str(y), self.classPriors) + '\n')
+        f.write(reduce(lambda x,y: str(x) + ',' + str(y), self.importantRootProbabilities.keys()) + '\n')
+        f.write(reduce(lambda x,y: str(x) + ',' + str(y), self.importantRootProbabilities.values()) + '\n')
+        f.write(reduce(lambda x,y: str(x) + ',' + str(y), self.regularRootProbabilities.keys()) + '\n')
+        f.write(reduce(lambda x,y: str(x) + ',' + str(y), self.regularRootProbabilities.values()) + '\n')
+        f.write(reduce(lambda x,y: str(x) + ',' + str(y), self.importantMultiplictyParameter.keys()) + '\n')
+        f.write(reduce(lambda x,y: str(x) + ',' + str(y), self.importantMultiplictyParameter.values()) + '\n')
+        f.write(reduce(lambda x,y: str(x) + ',' + str(y), self.regularMultiplictyParameter.keys()) + '\n')
+        f.write(reduce(lambda x,y: str(x) + ',' + str(y), self.regularMultiplictyParameter.values()) + '\n')
+        #f.write(reduce(lambda x,y: str(x) + ',' + str(y), self.alpha) + '\n')Good for bayse
+        #f.write(reduce(lambda x,y: str(x) + ',' + str(y), self.beta) + '\n')
+        f.write(str(self.alpha) + '\n')
+        f.write(str(self.beta) + '\n')
+        f.write(reduce(lambda x,y: str(x) + ',' + str(y), self.tags) + '\n')
+        f.write(reduce(lambda x,y: str(x) + ',' + str(y), self.sentenceTypes) + '\n')
+        f.write(reduce(lambda x,y: str(x) + ',' + str(y), self.phraseTags) + '\n')
+        f.close()
+        self.importantCondPresenceProbs.to_csv(target + "I.csv")
+        self.regularCondPresenceProbs.to_csv(target + "R.csv")
+    
+    #Load parameters from file. Simply provide it with the name you provided \
+    #to storeParameters. The argument "default" will load the parameters fit by the author.
+    def loadParameters(self, target):
+        try: str(target)
+        except:
+            print "load parameters needs to be passed a string"
+            return
+        f = open(target,'r')
+        groups = [x.split(',') for x in f.read().split('\n')]
+        self.classPriors = groups[0]
+        self.importantRootProbabilities = dict(zip(groups[1],[float(x) for x in groups[2]]))
+        self.regularRootProbabilities = dict(zip(groups[3],[float(x) for x in groups[4]]))
+        self.importantMultiplictyParameter = dict(zip(groups[5],[float(x) for x in groups[6]]))
+        self.regularMultiplictyParameter = dict(zip(groups[7],[float(x) for x in groups[8]]))
+        #self.alpha = groups[10]#comin with the bayes update
+        #self.beta = groups[11]
+        self.alpha = float(groups[9][0])
+        self.beta = float(groups[10][0])
+        self.tags = groups[11]
+        self.sentenceTypes = groups[12]
+        self.phraseTags = groups[13]
+        f.close()
+        self.importantCondPresenceProbs = pd.read_csv(target + 'I.csv')
+        self.regularCondPresenceProbs = pd.read_csv(target + 'R.csv')
