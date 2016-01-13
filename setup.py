@@ -10,7 +10,6 @@ setup(name='syse',
     license = 'MIT',
     install_requires = [
         'pandas',
-        're',
         'numpy',
         'unicodedata',
         'math'],
