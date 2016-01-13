@@ -20,3 +20,8 @@ sy.classify("This is an important sentence")
 
 #Summarize an article (str or unicode) stored in myArticle
 sy.summarize(myArticle)
+
+#If you would like to use the default parameters, you should download the files titled "default", "defaultI.csv", and "defaultR.csv".
+#Then, you may place them in any directory you would like and point to the "default" file using the "loadParameters" method.
+#For example, if you have placed the files in /home/user/myFolder, you would call:
+sy.loadParameters('/home/user/myFolder/default')
