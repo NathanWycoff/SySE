@@ -22,7 +22,7 @@ import inspect
 #kinds of words, and the word's dependencies on one another.
 class SySE:
     def __init__(self):
-        self.loadParameters(inspect.getfile(syse) + '/' + 'default')
+        self.loadParameters(os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))) + '/' + 'default')
     ####Supervised Training.
     #trainingSentences: sentences on which to train (Must already be parsed)
     #labels: corresponding binary (1,0) labels.
