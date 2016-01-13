@@ -10,6 +10,5 @@ setup(name='syse',
     license = 'MIT',
     install_requires = [
         'pandas',
-        'numpy',
-        'math'],
+        'numpy'],
     dependency_links = ['https://github.com/emilmont/pyStatParser/tarball/master'])
