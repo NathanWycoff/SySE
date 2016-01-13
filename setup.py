@@ -11,6 +11,5 @@ setup(name='syse',
     install_requires = [
         'pandas',
         'numpy',
-        'unicodedata',
         'math'],
     dependency_links = ['https://github.com/emilmont/pyStatParser/tarball/master'])
