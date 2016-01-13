@@ -5,6 +5,7 @@ import numpy as np
 import unicodedata
 import math
 import os
+import sys
 
 #Syntactic Sentence Extraction (SySE)
 
@@ -19,6 +20,8 @@ import os
 #its phrases; it doesn't look at all what words are being used, just at what \
 #kinds of words, and the word's dependencies on one another.
 class SySE:
+    def __init__(self):
+        self.loadParameters(os.path.dirname(os.path.realpath(sys.argv[0])) + 'default')
     ####Supervised Training.
     #trainingSentences: sentences on which to train (Must already be parsed)
     #labels: corresponding binary (1,0) labels.
@@ -596,6 +599,8 @@ class SySE:
         return sentences
     
     #Write the parameters we have to file. This will create three files.
+    #Passing the parameter "default" to this function will overwrite the \
+    #parameters fit by the author.
     def storeParameters(self, target):
         try: str(target)
         except:
@@ -623,7 +628,8 @@ class SySE:
         self.regularCondPresenceProbs.to_csv(target + "R.csv")
     
     #Load parameters from file. Simply provide it with the name you provided \
-    #to storeParameters. The argument "default" will load the parameters fit by the author.
+    #to storeParameters. The argument "default" will load the parameters \
+    #fit by the author.
     def loadParameters(self, target):
         try: str(target)
         except:
@@ -631,7 +637,7 @@ class SySE:
             return
         f = open(target,'r')
         groups = [x.split(',') for x in f.read().split('\n')]
-        self.classPriors = groups[0]
+        self.classPriors = [float(x) for x in groups[0]]
         self.importantRootProbabilities = dict(zip(groups[1],[float(x) for x in groups[2]]))
         self.regularRootProbabilities = dict(zip(groups[3],[float(x) for x in groups[4]]))
         self.importantMultiplictyParameter = dict(zip(groups[5],[float(x) for x in groups[6]]))
@@ -644,5 +650,5 @@ class SySE:
         self.sentenceTypes = groups[12]
         self.phraseTags = groups[13]
         f.close()
-        self.importantCondPresenceProbs = pd.read_csv(target + 'I.csv')
-        self.regularCondPresenceProbs = pd.read_csv(target + 'R.csv')
+        self.importantCondPresenceProbs = pd.read_csv(target + 'I.csv', index_col = 0)
+        self.regularCondPresenceProbs = pd.read_csv(target + 'R.csv', index_col = 0)
