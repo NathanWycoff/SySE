@@ -6,6 +6,7 @@ import unicodedata
 import math
 import os
 import sys
+import inspect
 
 #Syntactic Sentence Extraction (SySE)
 
@@ -21,7 +22,7 @@ import sys
 #kinds of words, and the word's dependencies on one another.
 class SySE:
     def __init__(self):
-        self.loadParameters(os.path.dirname(os.path.realpath(sys.argv[0])) + 'default')
+        self.loadParameters(inspect.getfile(syse) + '/' + 'default')
     ####Supervised Training.
     #trainingSentences: sentences on which to train (Must already be parsed)
     #labels: corresponding binary (1,0) labels.
