@@ -10,7 +10,7 @@ with open(path.join(here, 'README'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
-    name='sample',
+    name='syse',
 
     version='1.1.1',
 
@@ -51,7 +51,7 @@ setup(
     # installed, specify them here.  If using Python 2.6 or less, then these
     # have to be included in MANIFEST.in as well.
     package_data={
-        'sample': ['package_data.dat'],
+        'syse': ['package_data.dat'],
     },
 )
 
