@@ -36,7 +36,7 @@ class SySE:
         if debug > -1:
             print
             print '**********************************************************'
-            print '                   SySE V 1.1 '
+            print '                   SySE V 1.1.2 '
             print 'Beginning Training Sequence with ' + \
                 str(len(trainingSentences)) + ' training sentences...'
             print '**********************************************************'
@@ -312,11 +312,13 @@ class SySE:
         ##Get P(x|y = Important) 
         PxGy1 = math.log(self.importantRootProbabilities[sentence[0]].getMean()) 
         PxGy1 = PxGy1 / self.importantRootProbabilities[sentence[0]].getVar()**varianceExponent
+        print 'IMPORANT This is before getCond...' + str(PxGy1)
         PxGy1 += self.getConditionalLevelProbability([sentence,self.importantCondPresenceProbs,self.importantMultiplictyParameter,sentence[0],varianceExponent,debug>=2])
         
         ##Get P(x|y = REGULAR) 
         PxGy0 = math.log(self.regularRootProbabilities[sentence[0]].getMean())
         PxGy0 = PxGy0/self.regularRootProbabilities[sentence[0]].getVar()**varianceExponent
+        print 'REGULAR This is before getCond...' + str(PxGy0)
         PxGy0 += self.getConditionalLevelProbability([sentence,self.regularCondPresenceProbs,self.regularMultiplictyParameter,sentence[0],varianceExponent,debug>=2])
         
         #Get priors in a log form:
@@ -619,7 +621,7 @@ class SySE:
         self.importantRootProbabilities = dict(zip([unicode(x) for x in groups[1]],[binomialParamDist().load(x) for x in groups[2]]))
         self.regularRootProbabilities = dict(zip([unicode(x) for x in groups[3]],[binomialParamDist().load(x) for x in groups[4]]))
         self.importantMultiplictyParameter = dict(zip([unicode(x) for x in groups[5]],[poissonParamDist().load(x) for x in groups[6]]))
-        self.regularMultiplictyParameter = dict(zip([unicode(x) for x in groups[7]],[binomialParamDist().load(x) for x in groups[8]]))
+        self.regularMultiplictyParameter = dict(zip([unicode(x) for x in groups[7]],[poissonParamDist().load(x) for x in groups[8]]))
         #self.alpha = groups[10]#comin with the bayes update
         #self.beta = groups[11]
         self.binomHyperParams = [float(x) for x in groups[9]]
