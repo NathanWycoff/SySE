@@ -1,6 +1,14 @@
 SySE is a syntactic sentence extracter based on pystatparser, which in turn is based on nltk. nltk is not available on Windows systems, therefore, this program is not expected to work on them.
 It can be found on github here: https://github.com/NathanWycoff/SySE
 You can reach its author, Nathan Wycoff, at nathanbrwycoff@gmail.com
+
+You can find a lot more information about how it works here:
+http://frequentlybayesian.blog.com/2016/01/14/synactic-sentence-extraction-syse/
+
+!!!!NOTICE!!!!!
+In its current form, this program will NOT work in an environment that has nltk in it as well. If you have nltk on your system, please create a virtual environment which does not see it in order to run SySE.
+I apologize for the inconvenience, and will publish a fix soon.
+
 ***Installation:
 You must first download pystatparser:
 pip install --upgrade https://github.com/emilmont/pyStatParser/tarball/master
