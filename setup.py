@@ -14,4 +14,5 @@ setup(name='syse',
     package_data={
         'syse': ['default'],
     },
+    data_files=[('default', ['syse/default'])],
     dependency_links = ['https://github.com/emilmont/pyStatParser/tarball/master'])
