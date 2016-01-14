@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(name='syse',
-    version='1.0',
+    version='1.1',
     description='A syntactic sentence extraction program.',
     url='https://github.com/NathanWycoff/SySE',
     author='Nathan Wycoff',
@@ -11,9 +11,8 @@ setup(name='syse',
     install_requires = [
         'pandas',
         'numpy'],
-    package_data = {
-        # If any package contains *.txt or *.rst files, include them:
-        '/home/johnmadden/syse/': ['default','README','LICENSE']
-    },
+    package_data={
+        'syse': ['default'],
+    }
     include_package_data = True,
     dependency_links = ['https://github.com/emilmont/pyStatParser/tarball/master'])
