@@ -13,6 +13,5 @@ setup(name='syse',
         'numpy'],
     package_data={
         'syse': ['default'],
-    }
-    include_package_data = True,
+    },
     dependency_links = ['https://github.com/emilmont/pyStatParser/tarball/master'])
