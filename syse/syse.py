@@ -21,10 +21,13 @@ from pkg_resources import resource_filename
 #kinds of words, and the word's dependencies on one another.
 class SySE:
     def __init__(self):
-        send = resource_filename(__name__, 'default.dat')
-        print(send)
-        self.loadParameters(send)
-        
+        try:
+            send = resource_filename(__name__, 'default.dat')
+            self.loadParameters(send)
+        except:
+            print "Could not load default parameters."
+            print "You should either train this object using the \"train\" " +\
+                "method, or load parameters using the loadParameters method"
     ####Supervised Training.
     #trainingSentences: sentences on which to train (Must already be parsed)
     #labels: corresponding binary (1,0) labels.
