@@ -4,7 +4,6 @@ import re
 import numpy as np
 import unicodedata
 import math
-from .syse import SySE
 from pkg_resources import resource_filename
 
 ###
