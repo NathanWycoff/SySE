@@ -17,17 +17,13 @@ setup(
     description='A syntactic sentence extraction program.',
     long_description=long_description,
 
-    # The project's main homepage.
     url='https://github.com/nathanwycoff/syse',
 
-    # Author details
     author='Nathan Wycoff',
     author_email='nathanbrwycoff@gmail.com',
 
-    # Choose your license
     license='MIT',
 
-    # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
@@ -38,20 +34,13 @@ setup(
 
     keywords='nlp summarization',
 
-    # You can just specify the packages manually here if your project is
-    # simple. Or you can use find_packages().
     packages=['syse'],
 
     install_requires = [
         'pandas',
         'numpy'],
-
-
-    # If there are data files included in your packages that need to be
-    # installed, specify them here.  If using Python 2.6 or less, then these
-    # have to be included in MANIFEST.in as well.
     package_data={
-        'syse': ['package_data.dat'],
+        'syse': ['default.dat'],
     },
 )
 
