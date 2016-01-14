@@ -13,7 +13,7 @@ setup(name='syse',
         'numpy'],
     package_data = {
         # If any package contains *.txt or *.rst files, include them:
-        '': ['default','README','LICENSE']
+        '/home/johnmadden/syse/': ['default','README','LICENSE']
     },
     include_package_data = True,
     dependency_links = ['https://github.com/emilmont/pyStatParser/tarball/master'])
