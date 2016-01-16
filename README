@@ -20,16 +20,21 @@ Useage:
 from syse import SySE
 sy = SySE()
 
-#Train on a dataset
-sy.train(trainingSentences, importanceLabels)
-
-#Evaluate a single sentence without context
+#If you don't get a warning, you're good to go!
+#You can get a probability on a single sentence using:
 sy.classify("This is an important sentence")
 
 #Summarize an article (str or unicode) stored in myArticle
 sy.summarize(myArticle)
 
-#If you would like to use the default parameters, you should download the files titled "default", "defaultI.csv", and "defaultR.csv".
-#Then, you may place them in any directory you would like and point to the "default" file using the "loadParameters" method.
-#For example, if you have placed the files in /home/user/myFolder, you would call:
-sy.loadParameters('/home/user/myFolder/default')
+#Otherwise, SySE may have been unable to load the default parameters,
+called "default.dat". This should have automatically downloaded to
+#The distribution where SySE is installed (try syse.__file__ in the interpreter with SySE loaded).
+#Download or locate it, then load it manually using:
+sy.loadParameters('path/to/default.dat')
+
+#Otherwise, you can train on a dataset yourself.
+sy.train(trainingSentences, importanceLabels)
+
+#The dataset used for default parameters can be found on the github.
+
